@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS gps_history (
+    id SERIAL PRIMARY KEY,
+    device_id INT REFERENCES devices(id) ON DELETE CASCADE,
+    lat DOUBLE PRECISION,
+    lng DOUBLE PRECISION,
+    accuracy DOUBLE PRECISION,
+    timestamp TIMESTAMP DEFAULT NOW()
+);
