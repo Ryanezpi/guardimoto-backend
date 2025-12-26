@@ -1,4 +1,4 @@
-import { linkNfcTag, unlinkNfcTag } from './nfc.service.js';
+import { linkNfcTag, unlinkNfcTag, verifyTag } from './nfc.service.js';
 import { logAuth } from '../../utils/logger.js';
 
 /**
