@@ -38,7 +38,7 @@ app.use(rateLimit);
 // ----------------------
 // Routes
 // ----------------------
-app.use('/auth', authMiddleware, authRoutes);
+app.use('/auth', authRoutes);
 app.use('/audit', authMiddleware, auditRoutes);
 app.use('/users', authMiddleware, userRoutes);
 app.use('/devices', deviceRoutes);

@@ -1,5 +1,6 @@
 import { registerUser } from './auth.service.js';
 import { logAuth } from '../../utils/logger.js';
+import { getAuth } from 'firebase-admin/auth';
 
 /**
  * POST /auth/register
@@ -18,5 +19,23 @@ export async function register(req, res, next) {
       return res.status(400).json({ success: false, message: 'User already exists' });
     }
     next(err);
+  }
+}
+
+export async function checkEmail(req, res, next) {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email required' });
+  }
+
+  try {
+    await getAuth().getUserByEmail(email);
+    return res.json({ exists: true });
+  } catch (err) {
+    if (err.code === 'auth/user-not-found') {
+      return res.json({ exists: false });
+    }
+    return res.status(500).json({ error: 'Internal error' });
   }
 }

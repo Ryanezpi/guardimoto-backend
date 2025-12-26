@@ -1,8 +1,10 @@
 import express from 'express';
-import { register } from './auth.controller.js';
+import { checkEmail, register } from './auth.controller.js';
+import { authMiddleware } from '../../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
-router.post('/register', register);
+router.post('/register', authMiddleware, register);
+router.post('/check-email', checkEmail);
 
 export default router;
